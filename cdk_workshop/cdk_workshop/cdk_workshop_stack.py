@@ -11,7 +11,8 @@ class CdkWorkshopStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         my_lambda = _lambda.Function(
-            self, 'HelloHandler',
+            self,
+            'HelloHandler',
             runtime=_lambda.Runtime.PYTHON_3_12,
             code=_lambda.Code.from_asset('lambda'),
             handler='hello.handler',
