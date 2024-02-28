@@ -20,7 +20,7 @@ class HitCounter(Construct):
 
         self._handler = _lambda.Function(
             self, 'HitCountHandler',
-            runtime=_lambda.Runtime.PYTHON_3_7,
+            runtime=_lambda.Runtime.PYTHON_3_12,
             handler='hitcount.handler',
             code=_lambda.Code.from_asset('lambda'),
             environment={
@@ -28,3 +28,6 @@ class HitCounter(Construct):
                 'HITS_TABLE_NAME': table.table_name,
             }
         )
+
+        table.grant_read_write_data(self._handler)
+        downstream.grant_invoke(self._handler)
